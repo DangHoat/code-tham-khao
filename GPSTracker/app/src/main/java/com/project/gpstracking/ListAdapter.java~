@@ -1,0 +1,121 @@
+package com.example.hiendohng.lab4_quanche;
+
+import android.content.Context;
+import android.text.Editable;
+import android.text.TextWatcher;
+import android.util.Log;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
+import android.widget.BaseAdapter;
+import android.widget.CheckBox;
+import android.widget.CompoundButton;
+import android.widget.EditText;
+import android.widget.ImageView;
+import android.widget.TextView;
+
+import java.util.ArrayList;
+
+public class DishAdapter extends BaseAdapter{
+
+    private ArrayList<DishItem> _Items;
+    private Context _CurrentContext;
+    private static LayoutInflater inflater=null;
+
+    public DishAdapter(Context context){
+
+        this._CurrentContext = context;
+        this._Items = new ArrayList<>();
+
+        inflater = ( LayoutInflater )_CurrentContext.
+                getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+    }
+
+    public void addDish(Dish newDish){
+        this._Items.add(new DishItem(newDish));
+    }
+
+    @Override
+    public int getCount() {
+        return this._Items.size();
+    }
+
+    @Override
+    public long getItemId(int position) {
+        return position;
+    }
+
+    @Override
+    public Object getItem(int position) {
+        return this._Items.get(position);
+    }
+
+    public class Holder
+    {
+        TextView tbDishName;
+        TextView tbPrice;
+        ImageView imageView;
+        CheckBox cbxChoose;
+        EditText tbQuantity;
+    }
+
+    @Override
+    public View getView(final int position, View convertView, ViewGroup parent) {
+
+        final Holder holder = new Holder();
+        View rowView = inflater.inflate(R.layout.menu_dish_list, null);
+
+        try {
+            holder.imageView = (ImageView) rowView.findViewById(R.id.imageView);
+            holder.tbDishName = (TextView) rowView.findViewById(R.id.tbDishName);
+            holder.tbPrice = (TextView) rowView.findViewById(R.id.tbPrice);
+            holder.cbxChoose = (CheckBox) rowView.findViewById(R.id.cbxChoose);
+            holder.tbQuantity = (EditText) rowView.findViewById(R.id.tbQuantity);
+            holder.imageView.setImageResource(this._Items.get(position).getImageID());
+            holder.tbDishName.setText(this._Items.get(position).getDishName());
+            holder.tbPrice.setText(this._Items.get(position).getPrice() + "k");
+            holder.tbQuantity.setText(String.valueOf(this._Items.get(position).getQuantity()));
+            holder.cbxChoose.setChecked(this._Items.get(position).isChosen());
+
+            holder.tbQuantity.addTextChangedListener(new TextWatcher() {
+                @Override
+                public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+                }
+
+                @Override
+                public void onTextChanged(CharSequence s, int start, int before, int count) {
+                    quantityOnTextChanged(s.toString(), position);
+                }
+
+                @Override
+                public void afterTextChanged(Editable s) {
+                }
+            });
+            holder.cbxChoose.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+                @Override
+                public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                    cbxOnCheckedChanged(isChecked, position);
+                }
+            });
+        }
+        catch(Exception ex){
+            Log.d("Error", ex.getMessage());
+            return null;
+        }
+        return rowView;
+    }
+
+    private void quantityOnTextChanged(String changedText, int position){
+        try {
+            this._Items.get(position).setQuantity(Integer.parseInt(changedText.trim()));
+        }
+        catch (Exception ex){
+            Log.d("Error", ex.getMessage());
+            this._Items.get(position).setQuantity(1);
+        }
+    }
+
+    private void cbxOnCheckedChanged(boolean checked, int position){
+        this._Items.get(position).setChosen(checked);
+    }
+}

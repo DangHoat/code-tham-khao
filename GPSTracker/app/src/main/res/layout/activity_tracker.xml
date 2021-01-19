@@ -1,0 +1,129 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent" android:layout_height="match_parent"
+    android:background="@drawable/layout_background">
+
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@drawable/custom_layout_main"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        android:layout_marginBottom="10dp"
+        android:layout_below="@+id/textView8">
+
+        <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentTop="true"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="false"
+            android:id="@+id/linearLayout"
+            android:layout_above="@+id/relativeLayout3">
+
+            <ListView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/listChildSetting"
+                android:background="@drawable/custom_layout"
+                android:layout_marginTop="5dp"
+                android:layout_marginLeft="5dp"
+                android:layout_marginRight="5dp"/>
+        </LinearLayout>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="150dp"
+            android:id="@+id/relativeLayout3"
+            android:layout_alignParentBottom="true"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true">
+
+            <CheckBox
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Display unread location"
+                android:id="@+id/checkShowUnreadLocation"
+                android:checked="true"
+                android:layout_alignParentTop="true"
+                android:textStyle="bold"
+                android:textSize="20dp"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentStart="true"
+                android:layout_marginLeft="20dp"
+                android:layout_marginTop="10dp" />
+
+            <CheckBox
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Display location by Date  "
+                android:id="@+id/checkShowLocationByDate"
+                android:layout_below="@+id/checkShowUnreadLocation"
+                android:textColor="#010101"
+                android:textSize="20dp"
+                android:textStyle="bold"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentStart="true"
+                android:layout_marginLeft="20dp"
+                android:layout_marginTop="10dp" />
+
+            <Button
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="DATE"
+                android:id="@+id/btnChooseDate"
+                android:textColor="#010101"
+                android:textStyle="bold"
+                android:textSize="15sp"
+                android:layout_below="@+id/checkShowUnreadLocation"
+                android:layout_toRightOf="@+id/checkShowLocationByDate"
+                android:layout_toEndOf="@+id/checkShowLocationByDate"
+                android:background="@drawable/button_enter"
+                android:layout_marginRight="20dp" />
+
+            <Button
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="DONE"
+                android:id="@+id/btnOKSetting"
+                android:textSize="15sp"
+                android:textStyle="bold"
+                android:textColor="#010101"
+                android:background="@drawable/button_enter"
+                android:paddingLeft="3dp"
+                android:paddingRight="3dp"
+                android:layout_below="@+id/btnChooseDate"
+                android:layout_alignRight="@+id/btnChooseDate"
+                android:layout_alignEnd="@+id/btnChooseDate"
+                android:layout_marginTop="5dp" />
+
+            <Button
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/imgbtnBackTracker"
+                android:background="@drawable/button_enter"
+                android:text="log out"
+                android:textSize="15sp"
+                android:textStyle="bold"
+                android:paddingLeft="10dp"
+                android:paddingRight="10dp"
+                android:layout_alignTop="@+id/btnOKSetting"
+                android:layout_alignLeft="@+id/checkShowLocationByDate"
+                android:layout_alignStart="@+id/checkShowLocationByDate" />
+
+        </RelativeLayout>
+    </RelativeLayout>
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Tracker Settings"
+        android:id="@+id/textView8"
+        android:gravity="center"
+        android:textColor="#ffffff"
+        android:textSize="24dp"
+        android:textStyle="bold" />
+
+</RelativeLayout>
